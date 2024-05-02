@@ -164,3 +164,56 @@ let slice_first_part = &var_name[..end_index]
 let slice_last_part = &var_name[start_index..]
 let slice_all_part = &var_name[..]
 ```
+
+## Structs
+
+Structs hold multiple related values, you’ll name each piece of data so it’s clear what the values mean and the pieces can be different types. 
+
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+impl User {
+	// associated functions
+	fn new_user(username: &String, email: &String) -> Self {
+		Self {
+			active: 1,
+			username,
+			email,
+			sign_in_count: 0
+		}
+	}
+
+	// method
+    fn email(&self) -> String {
+		self.email
+    }
+}
+
+// tuple struct
+struct Color(i32, i32, i32);
+
+// unit-like structs
+struct AlwaysEqual;
+
+fn main() {
+    let user1 = User::new_user(&String::from("someusername123"), &String::from("someone@example.com"));
+
+	user1.email = String::from("anotheremail@example.com");
+
+	let user2 = User {
+        email: String::from("another@example.com"),
+        ..user1 // no longer use user1 as a whole
+    };
+
+	let black = Color(0, 0, 0);
+
+	let subject = AlwaysEqual;
+
+	let user1_email = user1.email()
+}
+```
