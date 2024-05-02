@@ -130,3 +130,37 @@ fn main() {
     }
 }
 ```
+
+## Ownership
+
+Ownership is a set of rules that govern how a Rust program manages memory.
+Rules:
+- Each value in Rust has an owner.
+- There can only be one owner at a time.
+- When the owner goes out of scope, the value will be dropped.
+
+There are 3 methods to assign a variable to another variable:
+- copy: bind the value stored on the stack, after bind the first and second variables are valid
+- move: bind the value stored on the heap to another variable, after bind the first variable is invalid
+- clone: deeply copy the heap data
+
+## References and borrowing
+
+A reference is like a pointer in that it’s an address we can follow to access the data stored at that address; that data is owned by some other variable.
+Unlike a pointer, a reference is guaranteed to point to a valid value of a particular type for the life of that reference.
+Must use & to pass a reference and indicate that the type of the parameter is a reference.
+A reference by default is immutable like a variable.
+Borrowing: to make a reference mutable must use &mut to pass a mutable reference and indicate that the type of the parameter is a mutable reference.
+To prevent dangling at any given time, you can have either one mutable reference or any number of immutable references.
+
+## Slice type
+
+A slice is a reference to part of a String, string litreal or array.
+A slice contains a pointer to the byte at the start index of a variable with a length value of the slice.
+
+```rust
+let slice = &var_name[start_index..end_index]
+let slice_first_part = &var_name[..end_index]
+let slice_last_part = &var_name[start_index..]
+let slice_all_part = &var_name[..]
+```
